@@ -16,6 +16,8 @@
 	if(isset($_POST['btnUpdate'])){
 		$name = $_POST['name'];
 		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$confrm_pass = $_POST['confrm_pass'];
 		$position = $_POST['position'];
 
 		$imgName = $_FILES['myfile']['name'];
@@ -27,6 +29,16 @@
 		}elseif(empty($email)){
 			$errorMsg = 'Please input email';
 		}
+		elseif(empty($password)){
+			$errorMsg = 'Please input password';
+		}
+		elseif(empty($confrm_pass)){
+			$errorMsg = 'Please input Conform password';
+		}
+
+		 elseif($password != $confrm_pass){
+       $errorMsg='Passwords do not match';
+    }
 		elseif(empty($position)){
 			$errorMsg = 'Please input position';
 		}
@@ -62,6 +74,8 @@
 			$sql = "update tbl_users
 									set name = '".$name."',
 									email = '".$email."',
+									password = '".$password."',
+									confrm_pass = '".$confrm_pass."',
 										position = '".$position."',
 										photo = '".$userPic."'
 					where id=".$id;
@@ -136,6 +150,18 @@
 			<label for="email" class="col-md-2">Email</label>
 			<div class="col-md-10">
 				<input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  placeholder="Enter you Email" class="form-control" value="<?php echo $row['email'] ?>">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="text" class="col-md-2">Password</label>
+			<div class="col-md-10">
+				<input type="password" name="password" placeholder="Enter you password" class="form-control" value="<?php echo $row['password'] ?>">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="text" class="col-md-2">Conform Password</label>
+			<div class="col-md-10">
+				<input type="password" name="confrm_pass"   placeholder="Enter you Conform password" class="form-control" value="<?php echo $row['confrm_pass'] ?>">
 			</div>
 		</div>
 		<div class="form-group">
