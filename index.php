@@ -50,6 +50,8 @@
 					<th>ID</th>
 					<th>Name</th>
 					<th>Email</th>
+					<!-- <th>Password </th>
+					<th>Conform password </th> -->
 					<th>Position</th>
 					<th>Photo</th>
 					<th>Action</th>
@@ -66,6 +68,8 @@
 					<td><?php echo $row['id'] ?></td>
 					<td><?php echo $row['name'] ?></td>
 					<td><?php echo $row['email'] ?></td>
+					<!-- <td><?php echo $row['password'] ?></td>
+					<td><?php echo $row['confrm_pass'] ?></td> -->
 					<td><?php echo $row['position'] ?></td>
 					<td><img src="<?php echo $upload_dir.$row['photo'] ?>" height="40"></td>
 					<td>
