@@ -5,6 +5,11 @@
 	if(isset($_POST['btnSave'])){
 		$name = $_POST['name'];
 		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$confrm_pass = $_POST['confrm_pass'];
+// 		if ($password != $confrm_pass) {
+// echo("Error... Passwords do not match");
+// }
 		$position = $_POST['position'];
 
 		$imgName = $_FILES['myfile']['name'];
@@ -16,6 +21,17 @@
 		}elseif(empty($email)){
 			$errorMsg = 'Please input Email';
 		}
+		elseif(empty($password)){
+			$errorMsg = 'Please input password';
+		}
+		elseif(empty($confrm_pass)){
+			$errorMsg = 'Please input Conform password';
+		}
+
+		 elseif($password != $confrm_pass){
+       $errorMsg='Passwords do not match';
+    }
+
 		elseif(empty($position)){
 			$errorMsg = 'Please input position';
 		}elseif(empty($imgName)){
@@ -42,8 +58,8 @@
 
 		//check upload file not error than insert data to database
 		if(!isset($errorMsg)){
-			$sql = "insert into tbl_users(name, email, position, photo)
-					values('".$name."', '".$email."', '".$position."', '".$userPic."')";
+			$sql = "insert into tbl_users(name, email, password, confrm_pass, position, photo)
+					values('".$name."', '".$email."', '".$password."', '".$confrm_pass."', '".$position."', '".$userPic."')";
 			$result = mysqli_query($conn, $sql);
 			if($result){
 				$successMsg = 'New record added successfully';
@@ -119,11 +135,24 @@
 			</div>
 		</div>
 		<div class="form-group">
+			<label for="text" class="col-md-2">Password</label>
+			<div class="col-md-10">
+				<input type="password" name="password" placeholder="Enter you password" class="form-control" value="<?php echo $row['password'] ?>">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="text" class="col-md-2">Conform Password</label>
+			<div class="col-md-10">
+				<input type="password" name="confrm_pass"   placeholder="Enter you Conform password" class="form-control" value="<?php echo $row['confrm_pass'] ?>">
+			</div>
+		</div>
+		<div class="form-group">
 			<label for="position" class="col-md-2">Position</label>
 			<div class="col-md-10">
 				<input type="text" name="position" placeholder="Enter you Position" class="form-control">
 			</div>
 		</div>
+
 		<div class="form-group">
 			<label for="photo" class="col-md-2">Photo</label>
 			<div class="col-md-10">
